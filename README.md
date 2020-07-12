@@ -1,4 +1,11 @@
-# JHook
+
+#    _ _                 _    
+#   (_) |__   ___   ___ | | __
+#   | | '_ \ / _ \ / _ \| |/ /
+#   | | | | | (_) | (_) |   < 
+#  _/ |_| |_|\___/ \___/|_|\_\
+# |__/                        
+
 Create hooks to files and web easily services using this robust Python module!
 
 #### Section 1. jfile
