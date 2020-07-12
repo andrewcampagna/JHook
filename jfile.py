@@ -8,7 +8,7 @@ class JFileWatcher():
 	Object instantiation:
 	To create a file watching object, you must pass in the absolute path 
 	to the file you want to create a hook. It would be best if you also 
-	gave in a file stat option to be watched see https://www.geeksforgeeks.org/python-os-stat-method/ 
+	gave in a file stat option to be watched see https://github.com/unixv/JHook/blob/master/README.md
 	for reference. By default, the file option to be observed is st_mtime.
 
 	Advanced thread daemon options:
