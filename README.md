@@ -55,7 +55,7 @@ watcher = jfile.JFileHook(file_abs_path="/testfile.text", change_function=(hello
 watcher.run_hook()
 ```
 
-Accessing data from within the watcher is simple but must follow some slightly more complicated but not painful. 
+Accessing data from within the watcher is simple but must follow some slightly more complicated but not painful rules. 
 When creating the argument dictionary, if we use the reserved keywords **last_st_data**, **jfile_data**, or **file_abs_path**
 with empty values, they will be filled, unpacked, and passed in as arguments.
 
