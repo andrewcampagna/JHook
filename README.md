@@ -145,4 +145,4 @@ def update_configs(file_abs_path):
 watcher = jfile.JFileHook(file_abs_path="/config.json", change_function=(update_configs, {"file_abs_path":""})
 watcher.run_hook()
 ```
-Now we can dynamically change user2's permissions to admin while our program is running straight from the config file **config.json**
+Now we can dynamically change user's permissions while our program is running straight from the config file **config.json**
