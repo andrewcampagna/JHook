@@ -41,6 +41,34 @@ watcher = jfile.JFileHook(file_abs_path="/testfile.text", change_function=hello_
 watcher.run_hook()
 ```
 
+Passing arguments to your change_function can be done by simply including a dictionary to be unpacked when the
+function is called.
+
+
+```python
+from jhook import jfile
+
+def hello_custom(data):
+  print(f"Hello custom {data} event!")
+
+watcher = jfile.JFileHook(file_abs_path="/testfile.text", change_function=(hello_custom, {"data":"function with arguments"})
+watcher.run_hook()
+```
+
+Accessing data from within the watcher is simple but must follow some slightly more complicated but not painful. 
+When creating the argument dictionary, if we use the reserved keywords **last_st_data** or **jfile_data** with 
+empty values, they will be filled, unpacked, and passed in as arguments.
+
+```python
+from jhook import jfile
+
+def hello_custom(last_st_time):
+  print(f"Our file was last modified {last_st_data}")
+
+watcher = jfile.JFileHook(file_abs_path="/testfile.text", change_function=(hello_custom, {"last_st_data":""})
+watcher.run_hook()
+```
+
 You might not want to have the event be triggered based on the **st_mtime** which is the files last modification
 time. Instead you can override the default for this by choosing from a variety of file statuses available from
 os.stat().
@@ -64,5 +92,19 @@ List of available file stats:
 | st_blocks | number of 512-byte blocks allocated for file. |
 | st_rdev | type of device, if an inode device. |
 | st_flags | user defined flags for file. |
+
+Accessing the data from your file_stat_opt is stored in last_st_data.
+
+```python
+from jhook import jfile
+
+def hello(last_st_data):
+  print(f"Permissions were changed to {last_st_data}")
+
+watcher = jfile.JFileHook(file_abs_path="/testfile.text", file_stat_opt="st_mode", change_function=(hello, {"last_st_data":""})
+watcher.run_hook()
+```
+
+
 
 #### Part 1-2. JDirWatcher
