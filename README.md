@@ -56,16 +56,16 @@ watcher.run_hook()
 ```
 
 Accessing data from within the watcher is simple but must follow some slightly more complicated but not painful. 
-When creating the argument dictionary, if we use the reserved keywords **last_st_data** or **jfile_data** with 
-empty values, they will be filled, unpacked, and passed in as arguments.
+When creating the argument dictionary, if we use the reserved keywords **last_st_data**, **jfile_data**, or **file_abs_path**
+with empty values, they will be filled, unpacked, and passed in as arguments.
 
 ```python
 from jhook import jfile
 
-def hello_custom(last_st_time):
-  print(f"Our file was last modified {last_st_data}")
+def hello_custom(last_st_time, file_abs_path):
+  print(f"{file_abs_path} was last modified {last_st_data}")
 
-watcher = jfile.JFileHook(file_abs_path="/testfile.text", change_function=(hello_custom, {"last_st_data":""})
+watcher = jfile.JFileHook(file_abs_path="/testfile.text", change_function=(hello_custom, {"last_st_data":"", "file_abs_path":""})
 watcher.run_hook()
 ```
 
@@ -98,13 +98,51 @@ Accessing the data from your file_stat_opt is stored in last_st_data.
 ```python
 from jhook import jfile
 
-def hello(last_st_data):
-  print(f"Permissions were changed to {last_st_data}")
+def hello(last_st_data, file_abs_path):
+  print(f"{file_abs_path} permissions were changed to {last_st_data}")
 
-watcher = jfile.JFileHook(file_abs_path="/testfile.text", file_stat_opt="st_mode", change_function=(hello, {"last_st_data":""})
+watcher = jfile.JFileHook(file_abs_path="/testfile.text", file_stat_opt="st_mode", change_function=(hello, {"last_st_data":"", "file_abs_path":""})
 watcher.run_hook()
 ```
 
+Stopping the daemon is as easy as calling
+```python3
+watcher.stop_hook()
+```
 
+If you would like debug logs from the file watchers operations you can set **logging** to True.
+
+```python3
+from jhook import jfile
+
+watcher = jfile.JFileHook(file_abs_path="/testfile.text", logging=True)
+watcher.run_hook()
+```
+
+output: 
+```
+File watcher started on /testfile.text on status st_mtime
+```
+
+
+Simple dynamic configuration file change using JFileWatcher example project:
+
+```python3
+from jhook import jfile
+import json
+import time
+
+configs = {"user1": {"permissions":"admin"}, "user2":{"permissions":"developer"}}
+
+def update_configs(jfile_data):
+  configs = json.loads(jfile_data)
+  print(configs)
+  print()
+  print("Updated program configuration!")
+
+watcher = jfile.JFileHook(file_abs_path="/config.json", change_function=(update_configs, {"jfile_data":""})
+watcher.run_hook()
+```
+Now we can dynamically change user2's permissions to admin while our program is running straight from the config file **config.json**
 
 #### Part 1-2. JDirWatcher
