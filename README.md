@@ -27,7 +27,7 @@ variable.
 watcher.data
 ```
 
-You can easily create custom functions to be called when instead of the default. **Note the data variable 
+You can easily create custom functions to be called instead of the default. **Note the data variable 
 will remain empty and will not be loaded if you override the default.** In the example below a new function
 is created and it's reference is passed into our JFileWatcher overriding the default trigger event.
 
