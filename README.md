@@ -134,13 +134,15 @@ import time
 
 configs = {"user1": {"permissions":"admin"}, "user2":{"permissions":"developer"}}
 
-def update_configs(jfile_data):
-  configs = json.loads(jfile_data)
+def update_configs(file_abs_path):
+  with open (file_abs_path, "r") as config_file_json:
+    configs = json.load(config_file_json)
+    config_file_json.close()
   print(configs)
   print()
   print("Updated program configuration!")
-
-watcher = jfile.JFileHook(file_abs_path="/config.json", change_function=(update_configs, {"jfile_data":""})
+  
+watcher = jfile.JFileHook(file_abs_path="/config.json", change_function=(update_configs, {"file_abs_path":""})
 watcher.run_hook()
 ```
 Now we can dynamically change user2's permissions to admin while our program is running straight from the config file **config.json**
