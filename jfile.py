@@ -26,7 +26,6 @@ class JFileWatcher():
 		self.check_time = check_time
 		self.change_function = change_function
 		self.logging = logging
-
 		self.running = False
 		self.last_st_data = self.__load_file_stat()[file_stat_opt]
 		self.data = ""
@@ -65,7 +64,16 @@ class JFileWatcher():
 				if self.change_function == None:
 					self.__load_file_data()
 				else:
-					self.change_function()
+					if type(self.change_function) is tuple:
+						if "last_st_data" in self.change_function[1].keys():
+							self.change_function[1]["last_st_data"] = self.last_st_data
+						if "jfile_data" in self.change_function[1].keys():
+							self.change_function[1]["jfile_data"] = self.data
+						if "file_abs_path" in self.change_function[1].keys():
+							self.change_function[1]["file_abs_path"] = self.data
+						self.change_function[0](**self.change_function[1])
+					else:
+						self.change_function()
 			time.sleep(self.check_time)
 
 		if self.logging:
