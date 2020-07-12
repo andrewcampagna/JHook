@@ -144,5 +144,3 @@ watcher = jfile.JFileHook(file_abs_path="/config.json", change_function=(update_
 watcher.run_hook()
 ```
 Now we can dynamically change user2's permissions to admin while our program is running straight from the config file **config.json**
-
-#### Part 1-2. JDirWatcher
