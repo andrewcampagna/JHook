@@ -151,6 +151,30 @@ Now we can dynamically change user's permissions while our program is running st
 
 #### Section 2. jweb
 
+jweb includes the JWebContentWatcher
+
+#### Part 2-1. JWebContentWatcher
+
+To create a minimal content watcher, you need a URL and an event trigger function. In the example we use a dynamically changing
+website that increments an integer on the page after each refresh.
+
+```python
+from jhook import jweb
+
+def hello_web():
+  print("Content has changed on the website!")
+  
+watcher = jweb.JWebContentWatcher(url="www.jhook.servercenter.org/jhook/examples/web/dynamic", change_function=hello_web)
+watcher.run_hook()
+```
+
+You can extract data from the watcher object and pass it as an argument to the trigger event, as we saw earlier with JFileWatcher.
+By default, the web request is a [GET], but you can set the hook to [POST] if needed. Below is an example of combining these two features.
+
+```python
+
+```
+
 #### Section 3. jdocker
 
 #### Section 4. jkube
