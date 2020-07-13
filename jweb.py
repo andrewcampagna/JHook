@@ -24,7 +24,7 @@ class JWebContentWatcher():
 	change function to execute when the hook triggers.
 	"""
 
-	def __init__(self, url, change_function=None, check_time=1, logging=False, request_head="GET", post_data=None):
+	def __init__(self, url, change_function=None, check_time=5, logging=False, request_head="GET", post_data=None):
 
 		self.url = url
 		self.change_function = change_function
