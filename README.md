@@ -183,6 +183,8 @@ watcher.run_hook()
 
 **Note if you select to use [POST] requests the post_data argument must take in a dictionary and the request uses the application/json Content-Type only**
 
+You should change the check_time to regulate traffic to the website requested. This value represented in seconds, and the default is 5 seconds.
+
 #### Section 3. jdocker
 
 #### Section 4. jkube
