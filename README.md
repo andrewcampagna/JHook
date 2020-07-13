@@ -172,8 +172,16 @@ You can extract data from the watcher object and pass it as an argument to the t
 By default, the web request is a [GET], but you can set the hook to [POST] if needed. Below is an example of combining these two features.
 
 ```python
+from jhook import jweb
 
+def hello_web(jweb_data):
+  print(jweb_data)
+  
+watcher = jweb.JWebContentWatcher(url="www.jhook.servercenter.org/jhook/examples/web/post", change_function=hello_web, request_head="POST", post_data={"data":"Hello there!"})
+watcher.run_hook()
 ```
+
+**Note if you select to use [POST] requests the post_data argument must take in a dictionary and the request uses the application/json Content-Type only**
 
 #### Section 3. jdocker
 
