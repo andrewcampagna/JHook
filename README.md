@@ -3,7 +3,7 @@
 
 Create hooks to files, web, and microservices easily services using this robust Python module!
 
-#### Section 1. jfile
+## Section 1. jfile
 
 jfile comes with the JFileWatcher and JDirWatcher, both launch daemon threads that are 
 highly customizable with custom timing, status watching options, console logging, and custom 
@@ -149,7 +149,7 @@ watcher.run_hook()
 ```
 Now we can dynamically change user's permissions while our program is running straight from the config file **config.json**
 
-#### Section 2. jweb
+## Section 2. jweb
 
 jweb includes the JWebContentWatcher
 
